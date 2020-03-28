@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="estilos.css" />
     <title>P.A.W</title>
     <link rel="shortcut icon" href="./images/logo.png" />
-  
   </head>
 
   <body data-spy="scroll" data-target="#navbar" data-offset="106">
@@ -30,7 +29,7 @@
       >
         <div class="container">
           <a class="navbar-brand" href="#">
-            <img src="./images/logo.png" alt="logo"/>
+            <img src="./images/logo.png" alt="logo" />
             P.A.W
           </a>
           <button
@@ -56,7 +55,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="#date">Descripción</a>
               </li>
-           
+              <li class="nav-item">
+                <a class="nav-link" href="measure.html">Medidas</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -97,7 +98,6 @@
                     data-toggle="modal"
                     >Objetivo</a
                   >
-                 
                 </div>
               </div>
             </div>
@@ -133,14 +133,15 @@
                 />
                 <div class="card-body">
                   <h5 class="card-title mb-1">
-                   DHT11
+                    DHT11
                     <span class="badge badge-success mb-0">Digital</span>
                   </h5>
                   <p class="card-text">
-                    Opera entre 3V y 5V, tiene un rango de medición de temperatura de 0°C a 50°C con una tolerancia de más o menos 2°C.
-                     En cuanto al rango de medición de humedad es de 20% a 90% RH y la resolución es de 1% RH. 
+                    Opera entre 3V y 5V, tiene un rango de medición de
+                    temperatura de 0°C a 50°C con una tolerancia de más o menos
+                    2°C. En cuanto al rango de medición de humedad es de 20% a
+                    90% RH y la resolución es de 1% RH.
                   </p>
-                  
                 </div>
               </div>
             </div>
@@ -157,18 +158,18 @@
                     <span class="badge badge-warning mb-0">Analogico</span>
                   </h5>
                   <p class="card-text">
-                    Opera entre 3.3V y 5V, tiene un consumo de menos de 20mA y tiene salida analógica.
-                     El área de detección es de 4cm de largo y 1.6cm de ancho. 
+                    Opera entre 3.3V y 5V, tiene un consumo de menos de 20mA y
+                    tiene salida analógica. El área de detección es de 4cm de
+                    largo y 1.6cm de ancho.
                   </p>
-                  
                 </div>
               </div>
             </div>
           </div>
-            <div class="row mt-2">
-              <div class="offset-md-1 col-12 col-md-5 mb-4">
+          <div class="row mt-2">
+            <div class="offset-md-1 col-12 col-md-5 mb-4">
               <div class="card">
-               <img
+                <img
                   src="./images/carga.jpg"
                   class="card-img-top"
                   alt="Organizador 1"
@@ -179,10 +180,11 @@
                     <span class="badge badge-success mb-0">Digital</span>
                   </h5>
                   <p class="card-text">
-                    El HX711 trabaja entre 2.7V y 5V, tiene un consumo menor de 1.5mA, se puede seleccionar 10SPS o 80SPS velocidad de datos de salida. 
-                    La celda de carga puede operar entre 3V y 12V, y tiene una protección IP65. 
+                    El HX711 trabaja entre 2.7V y 5V, tiene un consumo menor de
+                    1.5mA, se puede seleccionar 10SPS o 80SPS velocidad de datos
+                    de salida. La celda de carga puede operar entre 3V y 12V, y
+                    tiene una protección IP65.
                   </p>
-                
                 </div>
               </div>
             </div>
@@ -197,27 +199,33 @@
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col-12 col-md-6 pl-0 pr-0 text-md-right pt-4 pd-4 pb-4">
-             <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1026873/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Water+sensor&type=line&xaxis=time&yaxis=water+level"></iframe>
+            <img
+              src="./images/esquema.png"
+              class="card-img-top"
+              alt="Organizador 1"
+            />
           </div>
 
           <div class="col-12 col-md-6 mb-2 pd-4 pb-4 pl-4">
             <h2 class="mt-2">Descripción</h2>
             <p>
-                Se llevara una estadística de la alimentación del animal, es decir, la cantidad de comida que está ingiriendo diaria y mensualmente, así como la cantidad de agua y de esta manera poder llevar un seguimiento de su dieta y saber si esta corresponde a la raza y edad de la mascota.   
-
-                También, en caso de comportamientos anómalos en su alimentación, poder comparar estos eventos con la temperatura y humedad en el aire y ver si se encuentran relacionados. 
-                
-                 
-                
-                Todas estas medidas se podrán visualizar como gráficas y tablas en el celular del dueño, así como mensajes de alerta en caso de que el perro esté comiendo o bebiendo fuera de los rangos respectivos. 
+              Se llevara una estadística de la alimentación del animal, es
+              decir, la cantidad de comida que está ingiriendo diaria y
+              mensualmente, así como la cantidad de agua y de esta manera poder
+              llevar un seguimiento de su dieta y saber si esta corresponde a la
+              raza y edad de la mascota. También, en caso de comportamientos
+              anómalos en su alimentación, poder comparar estos eventos con la
+              temperatura y humedad en el aire y ver si se encuentran
+              relacionados. Todas estas medidas se podrán visualizar como
+              gráficas y tablas en el celular del dueño, así como mensajes de
+              alerta en caso de que el perro esté comiendo o bebiendo fuera de
+              los rangos respectivos.
             </p>
           </div>
         </div>
       </div>
     </section>
     <!-- /DESCRIPCION -->
-
-  
 
     <!-- FOOTER -->
     <footer id="footer" class="pb-4 pt-4">
@@ -271,8 +279,14 @@
             </button>
           </div>
           <div class="modal-body">
-            <p>Se planea diseñar un sistema que permita el cuidado automático de mascotas, esto refiriéndose a su alimentación y ambiente. La idea es que, ante la ausencia de los amos del perro, el sistema sea capaz de monitorear constantemente el nivel de agua, 
-              cantidad de comida (por peso) y temperatura ambiente en la que se encuentra la mascota.  </p>
+            <p>
+              Se planea diseñar un sistema que permita el cuidado automático de
+              mascotas, esto refiriéndose a su alimentación y ambiente. La idea
+              es que, ante la ausencia de los amos del perro, el sistema sea
+              capaz de monitorear constantemente el nivel de agua, cantidad de
+              comida (por peso) y temperatura ambiente en la que se encuentra la
+              mascota.
+            </p>
           </div>
           <div class="modal-footer">
             <button
