@@ -15,6 +15,10 @@ div[class^="col-"] {
   background-color: #82ad36;
 }
 
+.inicio {
+  margin-top: 70px;
+}
+
 #header img {
   width: 40px;
   height: 40px;
