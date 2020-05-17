@@ -44,7 +44,10 @@ function createUser(email, password) {
       console.log("¡Creamos al usuario!");
     })
     .catch(function (error) {
-      console.error(error);
+      const de = document.getElementById("error");
+      de.style.display = "block";
+
+      de.innerHTML = `${error.message}`;
     });
 }
 
