@@ -97,9 +97,7 @@ firebase.auth().onAuthStateChanged(function handleAuthState(user) {
     }
     return console.log("Sesion iniciada");
   }
-  const admin = document.getElementById("admin");
-  admin.innerHTML = "";
-  admin.style.display = "none";
+
   const agua = document.getElementById("agua1");
   agua.style.display = "none";
   const temp = document.getElementById("temp1");
