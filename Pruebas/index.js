@@ -13,8 +13,6 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
-const opts = { crossDomain: true };
-
 function obtenerAgua() {
   return new Promise((resolve, reject) => {
     const url = `https://io.adafruit.com/api/v2/sebitil/feeds/water/data/`;
