@@ -49,17 +49,20 @@
 
           <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">Principal </a>
+              <li class="nav-item" id="nameUser" style="border-right: 1px solid #FFF;">
+                
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#agua">Agua</a>
+                <a class="nav-link" href="index.html" id='princi'>Principal </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#temp">Temperatura</a>
+                <a class="nav-link" href="#agua" id="agua1">Agua</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#hum">Humedad</a>
+                <a class="nav-link" href="#temp" id="temp1">Temperatura</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#hum" id="hum1">Humedad</a>
               </li>
             </ul>
           </div>
@@ -127,153 +130,15 @@
   </div>
 </div>
 
+    
 
     <section id="privateInfo" style="display: none;">
-      <section class="medidas" id="agua">
-        <div class="container measu border-bottom border-info">
-          <div class="row mt-4 d-flex justify-content-center" id="logOut">
-           
-          </div>
-          <div class="row mt-4">
-            <div class="col text-center text-uppercase">
-              <small>Medidas en tiempo real</small>
-              <h2>del sensor de agua</h2>
-            </div>
-          </div>
-
-          <div class="row mt-2">
-            <div
-              class="offset-xl-1 offset-lg-3 offset-md-2 col-12 col-xl-5 mb-4"
-            >
-              <div class="card">
-                <iframe
-                  class="grafica"
-                  style="border: 1px solid #cccccc;"
-                  src="https://thingspeak.com/channels/1026873/widgets/165485"
-                ></iframe>
-                <div class="card-body">
-                  <h5 class="card-title mb-1">
-                    Data actual del nivel de agua
-                  </h5>
-                </div>
-              </div>
-            </div>
-            <div
-              class="offset-xl-0 offset-lg-3 offset-md-2 col-12 col-xl-5 mb-4"
-            >
-              <div class="card">
-                <iframe
-                  class="grafica"
-                  style="border: 1px solid #cccccc;"
-                  src="https://thingspeak.com/channels/1026873/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"
-                ></iframe>
-                <div class="card-body">
-                  <h5 class="card-title mb-1">
-                    Data diaria del nivel de agua
-                  </h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="medidas mt-4" id="temp">
-        <div class="container border-bottom border-info">
-          <div class="row mt-2">
-            <div class="col text-center text-uppercase">
-              <small>Medidas en tiempo real</small>
-              <h2>de la temperatura</h2>
-            </div>
-          </div>
-
-          <div class="row mt-2">
-            <div
-              class="offset-xl-1 offset-lg-3 offset-md-2 col-12 col-xl-5 mb-4"
-            >
-              <div class="card">
-                <iframe
-                  class="grafica"
-                  style="border: 1px solid #cccccc;"
-                  src="https://thingspeak.com/channels/1026873/widgets/165780"
-                ></iframe>
-                <div class="card-body">
-                  <h5 class="card-title mb-1">
-                    Data actual de temperatura
-                  </h5>
-                </div>
-              </div>
-            </div>
-            <div
-              class="offset-xl-0 offset-lg-3 offset-md-2 col-12 col-xl-5 mb-4"
-            >
-              <div class="card">
-                <iframe
-                  class="grafica"
-                  style="border: 1px solid #cccccc;"
-                  src="https://thingspeak.com/channels/1026873/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Temperatura&type=line&xaxis=Date&yaxis=%C2%B0C"
-                ></iframe>
-                <div class="card-body">
-                  <h5 class="card-title mb-1">
-                    Data diaria de temperatura
-                  </h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="medidas mt-4" id="hum">
-        <div class="container">
-          <div class="row mt-2">
-            <div class="col text-center text-uppercase">
-              <small>Medidas en tiempo real</small>
-              <h2>de la humedad</h2>
-            </div>
-          </div>
-
-          <div class="row mt-2">
-            <div
-              class="offset-xl-1 offset-lg-3 offset-md-2 col-12 col-xl-5 mb-4"
-            >
-              <div class="card">
-                <iframe
-                  class="grafica"
-                  style="border: 1px solid #cccccc;"
-                  src="https://thingspeak.com/channels/1026873/widgets/165779"
-                ></iframe>
-                <div class="card-body">
-                  <h5 class="card-title mb-1">
-                    Data actual de humedad
-                  </h5>
-                </div>
-              </div>
-            </div>
-            <div
-              class="offset-xl-0 offset-lg-3 offset-md-2 col-12 col-xl-5 mb-4"
-            >
-              <div class="card">
-                <iframe
-                  class="grafica"
-                  style="border: 1px solid #cccccc;"
-                  src="https://thingspeak.com/channels/1026873/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Humedad&type=line&xaxis=Date&yaxis=Humedad+relativa"
-                ></iframe>
-                <div class="card-body">
-                  <h5 class="card-title mb-1">
-                    Data diaria de humedad
-                  </h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
     </section>
     
     <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"
     ></script>
     <script

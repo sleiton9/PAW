@@ -72,11 +72,44 @@ function signoutUser() {
 firebase.auth().onAuthStateChanged(function handleAuthState(user) {
   if (user) {
     showPrivateInfo();
-    return console.log("Habemus user 🎉");
+    const nameUser = document.getElementById("nameUser");
+    nameUser.innerHTML = `<a class="nav-link" style="color:white">${user.email}</a>`;
+    const agua = document.getElementById("agua1");
+    agua.style.display = "flex";
+    const temp = document.getElementById("temp1");
+    temp.style.display = "flex";
+    const hum = document.getElementById("hum1");
+    hum.style.display = "flex";
+    if (user.email == "sebas_garzon@hotmail.com") {
+      const admin = document.getElementById("admin");
+      admin.innerHTML = `
+      <div class="col text-center text-uppercase">
+        <small>${user.email}</small>
+        <h2>Bienvenido Admin!</h2>
+      </div>`;
+      admin.className += " border-bottom";
+      admin.className += " border-info";
+      admin.style.display = "flex";
+    } else {
+      const admin = document.getElementById("admin");
+      admin.innerHTML = "";
+      admin.style.display = "none";
+    }
+    return console.log("Sesion iniciada");
   }
-
+  const admin = document.getElementById("admin");
+  admin.innerHTML = "";
+  admin.style.display = "none";
+  const agua = document.getElementById("agua1");
+  agua.style.display = "none";
+  const temp = document.getElementById("temp1");
+  temp.style.display = "none";
+  const hum = document.getElementById("hum1");
+  hum.style.display = "none";
   showLoginForm();
-  return console.log("No habemus user 😭");
+  nameUser.innerHTML = `<a class="nav-link" style="color:white">Inicia sesion</a>`;
+  privateInfo.innerHTML = `No hay nada privado que ver`;
+  return console.log("No hay una sesion");
 });
 
 function showPrivateInfo(user) {
@@ -85,12 +118,164 @@ function showPrivateInfo(user) {
   const de = document.getElementById("error");
   const privateInfo = document.getElementById("privateInfo");
   privateInfo.style.display = "block";
+  privateInfo.innerHTML = `
+  
+  <section class="medidas" id="agua">
+
+  
+
+  <div class="container measu border-bottom border-info">
+
+  <div class="row mt-4 d-flex justify-content-center" id="admin">
+     
+  </div>
+    <div class="row mt-4 d-flex justify-content-center " id="logOut" >
+     
+    </div>
+    <div class="row mt-4">
+      <div class="col text-center text-uppercase">
+        <small>Medidas en tiempo real</small>
+        <h2>del sensor de agua</h2>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div
+        class="offset-xl-1 offset-lg-3 offset-md-2 col-12 col-xl-5 mb-4"
+      >
+        <div class="card">
+          <iframe
+            class="grafica"
+            style="border: 1px solid #cccccc;"
+            src="https://thingspeak.com/channels/1026873/widgets/165485"
+          ></iframe>
+          <div class="card-body">
+            <h5 class="card-title mb-1">
+              Data actual del nivel de agua
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div
+        class="offset-xl-0 offset-lg-3 offset-md-2 col-12 col-xl-5 mb-4"
+      >
+        <div class="card">
+          <iframe
+            class="grafica"
+            style="border: 1px solid #cccccc;"
+            src="https://thingspeak.com/channels/1026873/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"
+          ></iframe>
+          <div class="card-body">
+            <h5 class="card-title mb-1">
+              Data diaria del nivel de agua
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="medidas mt-4" id="temp">
+  <div class="container border-bottom border-info">
+    <div class="row mt-2">
+      <div class="col text-center text-uppercase">
+        <small>Medidas en tiempo real</small>
+        <h2>de la temperatura</h2>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div
+        class="offset-xl-1 offset-lg-3 offset-md-2 col-12 col-xl-5 mb-4"
+      >
+        <div class="card">
+          <iframe
+            class="grafica"
+            style="border: 1px solid #cccccc;"
+            src="https://thingspeak.com/channels/1026873/widgets/165780"
+          ></iframe>
+          <div class="card-body">
+            <h5 class="card-title mb-1">
+              Data actual de temperatura
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div
+        class="offset-xl-0 offset-lg-3 offset-md-2 col-12 col-xl-5 mb-4"
+      >
+        <div class="card">
+          <iframe
+            class="grafica"
+            style="border: 1px solid #cccccc;"
+            src="https://thingspeak.com/channels/1026873/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Temperatura&type=line&xaxis=Date&yaxis=%C2%B0C"
+          ></iframe>
+          <div class="card-body">
+            <h5 class="card-title mb-1">
+              Data diaria de temperatura
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="medidas mt-4" id="hum">
+  <div class="container">
+    <div class="row mt-2">
+      <div class="col text-center text-uppercase">
+        <small>Medidas en tiempo real</small>
+        <h2>de la humedad</h2>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div
+        class="offset-xl-1 offset-lg-3 offset-md-2 col-12 col-xl-5 mb-4"
+      >
+        <div class="card">
+          <iframe
+            class="grafica"
+            style="border: 1px solid #cccccc;"
+            src="https://thingspeak.com/channels/1026873/widgets/165779"
+          ></iframe>
+          <div class="card-body">
+            <h5 class="card-title mb-1">
+              Data actual de humedad
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div
+        class="offset-xl-0 offset-lg-3 offset-md-2 col-12 col-xl-5 mb-4"
+      >
+        <div class="card">
+          <iframe
+            class="grafica"
+            style="border: 1px solid #cccccc;"
+            src="https://thingspeak.com/channels/1026873/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Humedad&type=line&xaxis=Date&yaxis=Humedad+relativa"
+          ></iframe>
+          <div class="card-body">
+            <h5 class="card-title mb-1">
+              Data diaria de humedad
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>`;
+
   de.style.display = "none";
   const buttonOut = document.getElementById("logOut");
   buttonOut.innerHTML = `<a href="https://io.adafruit.com/sebitil/dashboards/paw?kiosk=true" target="_blank" class="btn btn-succes btn-platzi">Adafruit IO</a>
                          <button id="btnLogout" class="btn btn-danger ml-2">Logout</button>`;
   const btnLogout = document.getElementById("btnLogout");
   btnLogout.addEventListener("click", signoutUser);
+  const princi = document.getElementById("princi");
+  princi.addEventListener("click", signoutUser);
 }
 
 function showLoginForm() {
@@ -99,4 +284,56 @@ function showLoginForm() {
 
   const privateInfo = document.getElementById("privateInfo");
   privateInfo.style.display = "none";
+}
+
+var db = firebase.firestore();
+
+const opts = { crossDomain: true };
+obtenerAgua();
+obtenerTemp();
+obtenerHum();
+
+function obtenerAgua() {
+  return new Promise((resolve, reject) => {
+    const url = `https://io.adafruit.com/api/v2/sebitil/feeds/water/data/`;
+    $.get(url, opts, function (data) {
+      resolve(data);
+      post(data[0].value, data[0].created_at, "Water");
+    }).fail(() => reject());
+  });
+}
+
+function obtenerTemp() {
+  return new Promise((resolve, reject) => {
+    const url = `https://io.adafruit.com/api/v2/sebitil/feeds/temp/data/`;
+    $.get(url, opts, function (data) {
+      resolve(data);
+      post(data[0].value, data[0].created_at, "Temperature");
+    }).fail(() => reject());
+  });
+}
+
+function obtenerHum() {
+  return new Promise((resolve, reject) => {
+    const url = `https://io.adafruit.com/api/v2/sebitil/feeds/hum/data/`;
+    $.get(url, opts, function (data) {
+      resolve(data);
+      post(data[0].value, data[0].created_at, "Humidity");
+    }).fail(() => reject());
+  });
+}
+
+function post(valor, fecha, sensor) {
+  var separador = fecha.split("T");
+  var hora = separador[1].slice(0, -1);
+  console.log(hora);
+  console.log(valor);
+  console.log(fecha);
+  db.collection(sensor)
+    .doc(`${separador[0]} at ${hora}`)
+    .set({
+      fecha: `${separador[0]}`,
+      hora: `${hora}`,
+      valor: `${valor}`,
+    });
 }
