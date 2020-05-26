@@ -17,7 +17,7 @@
     />
     <link rel="stylesheet" href="estilos.css" />
     <title>P.A.W</title>
-    <link rel="shortcut icon" href="./images/logo.png" />
+    <link rel="shortcut icon" href="./images/logo.jpeg" />
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
@@ -32,7 +32,7 @@
       >
         <div class="container">
           <a class="navbar-brand" href="#">
-            <img src="./images/logo.png" alt="logo" />
+            <img src="./images/logo.jpeg" alt="logo" />
             P.A.W
           </a>
           <button
@@ -127,26 +127,25 @@
         <div class="row">
           <div class="col text-center text-uppercase">
             <small>Conoce los</small>
-            <h2>Sensores</h2>
+            <h2>Beneficios</h2>
           </div>
           <div class="row mt-2">
             <div class="offset-md-1 col-12 col-md-5 mb-4">
               <div class="card">
                 <img
-                  src="./images/dht11.jpg"
+                  src="./images/temp.jpeg"
                   class="card-img-top"
                   alt="Organizador 1"
                 />
                 <div class="card-body">
                   <h5 class="card-title mb-1">
-                    DHT11
+                    Temperatura
                     <span class="badge badge-success mb-0">Digital</span>
                   </h5>
-                  <p class="card-text">
-                    Opera entre 3V y 5V, tiene un rango de medición de
-                    temperatura de 0°C a 50°C con una tolerancia de más o menos
-                    2°C. En cuanto al rango de medición de humedad es de 20% a
-                    90% RH y la resolución es de 1% RH.
+                  <p ALIGN="justify" class="card-text">
+                    Las mascotas también sufren de estrés por exceso de calor o frío. El nodo inalámbrico 
+                    monitorea también la temperatura y se encarga de notificarte si el entorno para tu 
+                    mascota es el adecuado.
                   </p>
                 </div>
               </div>
@@ -154,19 +153,20 @@
             <div class="col-12 col-md-5 mb-4">
               <div class="card">
                 <img
-                  src="./images/agua.jpg"
+                  src="./images/agua.jpeg"
                   class="card-img-top"
                   alt="Organizador 1"
                 />
                 <div class="card-body">
                   <h5 class="card-title mb-1">
-                    Sensor de nivel de agua
+                    Nivel de agua
                     <span class="badge badge-warning mb-0">Analogico</span>
                   </h5>
-                  <p class="card-text">
-                    Opera entre 3.3V y 5V, tiene un consumo de menos de 20mA y
-                    tiene salida analógica. El área de detección es de 4cm de
-                    largo y 1.6cm de ancho.
+                  <p ALIGN="justify" class="card-text">
+                    Ahora tu mascota siempre tendrá agua disponible para saciar su sed. 
+                    El nodo inalámbrico monitorea siempre el nivel de agua y se encarga de rellenar 
+                    el recipiente cada que sea necesario. Además, te notifica en la página WEB cuando 
+                    ya no hay agua suficiente.
                   </p>
                 </div>
               </div>
@@ -176,20 +176,20 @@
             <div class="offset-md-1 col-12 col-md-5 mb-4">
               <div class="card">
                 <img
-                  src="./images/carga.jpg"
+                  src="./images/hum.jpeg"
                   class="card-img-top"
                   alt="Organizador 1"
                 />
                 <div class="card-body">
                   <h5 class="card-title mb-1">
-                    Celda de carga
+                    Humedad
                     <span class="badge badge-success mb-0">Digital</span>
                   </h5>
-                  <p class="card-text">
-                    El HX711 trabaja entre 2.7V y 5V, tiene un consumo menor de
-                    1.5mA, se puede seleccionar 10SPS o 80SPS velocidad de datos
-                    de salida. La celda de carga puede operar entre 3V y 12V, y
-                    tiene una protección IP65.
+                  <p ALIGN="justify" class="card-text">
+                    Las mascotas que viven en un lugar demasiado húmedo tienen una alta probabilidad de padecer
+                    problemas en la piel, sobretodo las de pelo largo, ya que la humedad facilita que la piel se 
+                    irrite provocando un gran picor. Con PAW estarás al tanto de la condición
+                    de humedad en el aire en la que se se encuentra tu perro o gato.
                   </p>
                 </div>
               </div>
@@ -214,18 +214,15 @@
 
           <div class="col-12 col-md-6 mb-2 pd-4 pb-4 pl-4">
             <h2 class="mt-2">Descripción</h2>
-            <p>
-              Se llevara una estadística de la alimentación del animal, es
-              decir, la cantidad de comida que está ingiriendo diaria y
-              mensualmente, así como la cantidad de agua y de esta manera poder
-              llevar un seguimiento de su dieta y saber si esta corresponde a la
-              raza y edad de la mascota. También, en caso de comportamientos
-              anómalos en su alimentación, poder comparar estos eventos con la
-              temperatura y humedad en el aire y ver si se encuentran
-              relacionados. Todas estas medidas se podrán visualizar como
-              gráficas y tablas en el celular del dueño, así como mensajes de
-              alerta en caso de que el perro esté comiendo o bebiendo fuera de
-              los rangos respectivos.
+            <p ALIGN="justify">
+              PAW es un sistema que permite el cuidado automático de mascotas, esto refiriéndose a su 
+              alimentación y entorno. La idea es que, ante la ausencia de los amos del perro, el sistema
+              sea capaz de monitorear constantemente el nivel de agua, temperatura y humedad del ambiente
+              en el que se encuentra la mascota.<br>
+              <br>Además del obvio cuidado inmediato de la mascota, lo que se propone también es llevar una
+              estadística de la ingesta de agua del animal para saber si corresponde a la raza y edad de
+              la mascota. También, en caso de comportamientos anómalos en su ingesta de agua, poder comparar
+              estos eventos con la temperatura y humedad en el aire y ver si se encuentran relacionados.
             </p>
           </div>
         </div>

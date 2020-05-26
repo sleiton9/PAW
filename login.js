@@ -128,6 +128,24 @@ function showPrivateInfo(user) {
     <div class="row mt-4 d-flex justify-content-center " id="logOut" >
      
     </div>
+    <div class="row mt-4 d-flex justify-content-center " id="dangerW" >
+     
+    </div>
+    <div class="row mt-4 d-flex justify-content-center " id="dangerT" >
+     
+    </div>
+    <div class="row mt-4 d-flex justify-content-center " id="asd" >
+
+    <h2>Valores promedio:</h2><br>
+
+    </div>
+
+    <div class="row mt-4 d-flex justify-content-center " id="analisis" >
+    </div>
+    <div class="row mt-4 d-flex justify-content-center " id="analisist" >
+    </div>
+    <div class="row mt-4 d-flex justify-content-center " id="analisish" >
+    </div>
     <div class="row mt-4">
       <div class="col text-center text-uppercase">
         <small>Medidas en tiempo real</small>
@@ -281,6 +299,8 @@ function showPrivateInfo(user) {
   btnLogout.addEventListener("click", signoutUser);
   const princi = document.getElementById("princi");
   princi.addEventListener("click", signoutUser);
+  const home = document.getElementById("home");
+  home.addEventListener("click", signoutUser);
 }
 
 function showLoginForm() {
@@ -356,12 +376,16 @@ function obtenerHumAll() {
 }
 
 function postAll(data, sensor) {
+  var conteo=0;
   for (var i=0; i<data.length; i++){
     var separador = data[i].created_at.split("T");
     var hora = separador[1].slice(0, -1);
     console.log(hora);
     console.log(data[i].value);
     console.log(separador[0]);
+    if(parseInt(data[i].value) != 0){
+      conteo=conteo+parseInt(data[i].value);
+    }
     db.collection(sensor)
     .doc(`${separador[0]} at ${hora}`)
     .set({
@@ -370,6 +394,37 @@ function postAll(data, sensor) {
       valor: `${data[i].value}`,
     });
   }
+  var promedio=conteo/data.length;
+  console.log(promedio)
+  const analisis = document.getElementById("analisis");
+  const analisist = document.getElementById("analisist");
+  const analisisw = document.getElementById("analisish");
+
+  const dangerW = document.getElementById("dangerW");
+  const dangerT = document.getElementById("dangerT");
+
+  if(data[0].feed_key == 'water'){
+    analisis.innerHTML += `<p> Agua: ${promedio.toFixed(2)}%  </p>`+`<br>`;
+    if(parseInt(data[0].value)<15){
+      dangerW.innerHTML += `<div class="alert alert-danger" role="alert">
+      Cuidado valor de agua bajo ${data[0].value}%
+    </div>`;
+    }
+  }
+  if(data[0].feed_key == 'temp'){
+    analisist.innerHTML += `<p>Temperatura: ${promedio.toFixed(2)}°C </p>`;
+ 
+    if(parseInt(data[0].value)>26){
+      dangerT.innerHTML += `<div class="alert alert-danger" role="alert">
+      Cuidado temperatura muy alta, ${data[0].value}°C
+    </div>`;
+    }
+  }
+  if(data[0].feed_key == 'hum'){
+    analisish.innerHTML += `<p> Humedad: ${promedio.toFixed(2)}%  </p>`;
+
+  }
+
 }
 
 function postLast(data, sensor) {
