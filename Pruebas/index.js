@@ -12,13 +12,29 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
+const opts = { crossDomain: true };
 
 function obtenerAgua() {
   return new Promise((resolve, reject) => {
     const url = `https://io.adafruit.com/api/v2/sebitil/feeds/water/data/`;
     $.get(url, opts, function (data) {
       resolve(data);
-      post(data[0].value, data[0].created_at, "Water");
+      console.log(data)
+      new Morris.Line({
+        // ID of the element in which to draw the chart.
+        element: 'myfirstchart',
+        // Chart data records -- each entry in this array corresponds to a point on
+        // the chart.
+        data: data,
+        // The name of the data record attribute that contains x-values.
+        xkey: 'year',
+        // A list of names of data record attributes that contain y-values.
+        ykeys: ['value'],
+        // Labels for the ykeys -- will be displayed when you hover over the
+        // chart.
+        labels: ['Value']
+      });
+
     }).fail(() => reject());
   });
 }
@@ -28,7 +44,7 @@ function obtenerTemp() {
     const url = `https://io.adafruit.com/api/v2/sebitil/feeds/temp/data/`;
     $.get(url, opts, function (data) {
       resolve(data);
-      post(data[0].value, data[0].created_at, "Temperature");
+
     }).fail(() => reject());
   });
 }
@@ -38,25 +54,30 @@ function obtenerHum() {
     const url = `https://io.adafruit.com/api/v2/sebitil/feeds/hum/data/`;
     $.get(url, opts, function (data) {
       resolve(data);
-      post(data[0].value, data[0].created_at, "Humidity");
     }).fail(() => reject());
   });
 }
 
-function post(valor, fecha, sensor) {
-  var separador = fecha.split("T");
-  var hora = separador[1].slice(0, -1);
-  console.log(hora);
-  console.log(valor);
-  console.log(fecha);
-  db.collection(sensor)
+function post(data, sensor) {
+  var conteo=0;
+  var maximo=10;
+  for (var i=0; i<maximo; i++){
+    var separador = data[i].created_at.split("T");
+    var hora = separador[1].slice(0, -1);
+    if(parseInt(data[i].value) != 0){
+      conteo=conteo+parseInt(data[i].value);
+    }
+    db.collection(sensor)
     .doc(`${separador[0]} at ${hora}`)
     .set({
       fecha: `${separador[0]}`,
       hora: `${hora}`,
-      valor: `${valor}`,
+      valor: `${data[i].value}`,
     });
+  }
 }
+
+
 
 obtenerAgua();
 obtenerTemp();

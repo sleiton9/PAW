@@ -377,15 +377,19 @@ function obtenerHumAll() {
 
 function postAll(data, sensor) {
   var conteo=0;
+  var maximo=0;
   for (var i=0; i<data.length; i++){
+  if(parseInt(data[i].value) != 0){
+    conteo=conteo+parseInt(data[i].value);
+  }
+}
+  for (var i=0; i<maximo; i++){
     var separador = data[i].created_at.split("T");
     var hora = separador[1].slice(0, -1);
     console.log(hora);
     console.log(data[i].value);
     console.log(separador[0]);
-    if(parseInt(data[i].value) != 0){
-      conteo=conteo+parseInt(data[i].value);
-    }
+    
     db.collection(sensor)
     .doc(`${separador[0]} at ${hora}`)
     .set({
@@ -398,7 +402,7 @@ function postAll(data, sensor) {
   console.log(promedio)
   const analisis = document.getElementById("analisis");
   const analisist = document.getElementById("analisist");
-  const analisisw = document.getElementById("analisish");
+  const analisish = document.getElementById("analisish");
 
   const dangerW = document.getElementById("dangerW");
   const dangerT = document.getElementById("dangerT");
