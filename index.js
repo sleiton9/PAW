@@ -19,16 +19,14 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
 const opts = { crossDomain: true };
-obtenerAgua();
-obtenerTemp();
-obtenerHum();
+
 
 function obtenerAgua() {
   return new Promise((resolve, reject) => {
     const url = `https://io.adafruit.com/api/v2/sebitil/feeds/water/data/`;
     $.get(url, opts, function (data) {
       resolve(data);
-      post(data[0].value, data[0].created_at, "Water");
+      postLast(data, "Water");
     }).fail(() => reject());
   });
 }
@@ -38,7 +36,7 @@ function obtenerTemp() {
     const url = `https://io.adafruit.com/api/v2/sebitil/feeds/temp/data/`;
     $.get(url, opts, function (data) {
       resolve(data);
-      post(data[0].value, data[0].created_at, "Temperature");
+      postLast(data, "Temperature");
     }).fail(() => reject());
   });
 }
@@ -48,22 +46,30 @@ function obtenerHum() {
     const url = `https://io.adafruit.com/api/v2/sebitil/feeds/hum/data/`;
     $.get(url, opts, function (data) {
       resolve(data);
-      post(data[0].value, data[0].created_at, "Humidity");
+      postLast(data, "Humidity");
     }).fail(() => reject());
   });
 }
 
-function post(valor, fecha, sensor) {
-  var separador = fecha.split("T");
-  var hora = separador[1].slice(0, -1);
-  console.log(hora);
-  console.log(valor);
-  console.log(fecha);
-  db.collection(sensor)
+function postLast(data, sensor) {
+    var separador = data[0].created_at.split("T");
+    var hora = separador[1].slice(0, -1);
+    console.log(hora);
+    console.log(data[0].value);
+    console.log(separador[0]);
+    db.collection(sensor)
     .doc(`${separador[0]} at ${hora}`)
     .set({
       fecha: `${separador[0]}`,
       hora: `${hora}`,
-      valor: `${valor}`,
-    });
+      valor: `${data[0].value}`,
+    }); 
 }
+
+function allSensor(){
+  obtenerAgua();
+  obtenerTemp();
+  obtenerHum();
+}
+
+setInterval('allSensor()',30000);

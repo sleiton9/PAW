@@ -51,10 +51,7 @@ function loginUser(email, password) {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(function (user) {
-      const correcto = document.getElementById("correcto");
-      correcto.innerHTML = `<p>Credenciales correctas, ¡bienvenido! ${email}</p>`;
-    })
+    .then()
     .catch(function (error) {
       const de = document.getElementById("error");
       de.style.display = "block";
@@ -71,7 +68,8 @@ function signoutUser() {
 
 firebase.auth().onAuthStateChanged(function handleAuthState(user) {
   if (user) {
-    showPrivateInfo();
+    showPrivateInfo(user);
+    allSensorAll();
     const nameUser = document.getElementById("nameUser");
     nameUser.innerHTML = `<a class="nav-link" style="color:white">${user.email}</a>`;
     const agua = document.getElementById("agua1");
@@ -268,8 +266,17 @@ function showPrivateInfo(user) {
 
   de.style.display = "none";
   const buttonOut = document.getElementById("logOut");
-  buttonOut.innerHTML = `<a href="https://io.adafruit.com/sebitil/dashboards/paw?kiosk=true" target="_blank" class="btn btn-succes btn-platzi">Adafruit IO</a>
+  if(user.email == "sebas_garzon@hotmail.com"){
+    buttonOut.innerHTML = `<a href="https://io.adafruit.com/sebitil/dashboards/paw?kiosk=true" target="_blank" class="btn btn-succes btn-platzi">Adafruit IO</a>
+                           <button id="btnLoad" class="btn btn-primary ml-2">Cargar datos</button>                     
+                           <button id="btnLogout" class="btn btn-danger ml-2">Logout</button>`;
+    const btnLoad = document.getElementById("btnLoad");
+    btnLoad.addEventListener("click", allSensorAll);
+  }else{
+    buttonOut.innerHTML = `<a href="https://io.adafruit.com/sebitil/dashboards/paw?kiosk=true" target="_blank" class="btn btn-succes btn-platzi">Adafruit IO</a>
                          <button id="btnLogout" class="btn btn-danger ml-2">Logout</button>`;
+  }
+  
   const btnLogout = document.getElementById("btnLogout");
   btnLogout.addEventListener("click", signoutUser);
   const princi = document.getElementById("princi");
@@ -287,51 +294,109 @@ function showLoginForm() {
 var db = firebase.firestore();
 
 const opts = { crossDomain: true };
-obtenerAgua();
-obtenerTemp();
-obtenerHum();
 
-function obtenerAgua() {
+function obtenerAguaLast() {
   return new Promise((resolve, reject) => {
     const url = `https://io.adafruit.com/api/v2/sebitil/feeds/water/data/`;
     $.get(url, opts, function (data) {
       resolve(data);
-      post(data[0].value, data[0].created_at, "Water");
+      postLast(data, "Water");
     }).fail(() => reject());
   });
 }
 
-function obtenerTemp() {
+function obtenerTempLast() {
   return new Promise((resolve, reject) => {
     const url = `https://io.adafruit.com/api/v2/sebitil/feeds/temp/data/`;
     $.get(url, opts, function (data) {
       resolve(data);
-      post(data[0].value, data[0].created_at, "Temperature");
+      postLast(data, "Temperature");
     }).fail(() => reject());
   });
 }
 
-function obtenerHum() {
+function obtenerHumLast() {
   return new Promise((resolve, reject) => {
     const url = `https://io.adafruit.com/api/v2/sebitil/feeds/hum/data/`;
     $.get(url, opts, function (data) {
       resolve(data);
-      post(data[0].value, data[0].created_at, "Humidity");
+      postLast(data, "Humidity");
     }).fail(() => reject());
   });
 }
 
-function post(valor, fecha, sensor) {
-  var separador = fecha.split("T");
-  var hora = separador[1].slice(0, -1);
-  console.log(hora);
-  console.log(valor);
-  console.log(fecha);
-  db.collection(sensor)
+function obtenerAguaAll() {
+  return new Promise((resolve, reject) => {
+    const url = `https://io.adafruit.com/api/v2/sebitil/feeds/water/data/`;
+    $.get(url, opts, function (data) {
+      resolve(data);
+      postAll(data, "Water");
+    }).fail(() => reject());
+  });
+}
+
+function obtenerTempAll() {
+  return new Promise((resolve, reject) => {
+    const url = `https://io.adafruit.com/api/v2/sebitil/feeds/temp/data/`;
+    $.get(url, opts, function (data) {
+      resolve(data);
+      postAll(data, "Temperature");
+    }).fail(() => reject());
+  });
+}
+
+function obtenerHumAll() {
+  return new Promise((resolve, reject) => {
+    const url = `https://io.adafruit.com/api/v2/sebitil/feeds/hum/data/`;
+    $.get(url, opts, function (data) {
+      resolve(data);
+      postAll(data, "Humidity");
+    }).fail(() => reject());
+  });
+}
+
+function postAll(data, sensor) {
+  for (var i=0; i<data.length; i++){
+    var separador = data[i].created_at.split("T");
+    var hora = separador[1].slice(0, -1);
+    console.log(hora);
+    console.log(data[i].value);
+    console.log(separador[0]);
+    db.collection(sensor)
     .doc(`${separador[0]} at ${hora}`)
     .set({
       fecha: `${separador[0]}`,
       hora: `${hora}`,
-      valor: `${valor}`,
+      valor: `${data[i].value}`,
     });
+  }
 }
+
+function postLast(data, sensor) {
+    var separador = data[0].created_at.split("T");
+    var hora = separador[1].slice(0, -1);
+    console.log(hora);
+    console.log(data[0].value);
+    console.log(separador[0]);
+    db.collection(sensor)
+    .doc(`${separador[0]} at ${hora}`)
+    .set({
+      fecha: `${separador[0]}`,
+      hora: `${hora}`,
+      valor: `${data[0].value}`,
+    }); 
+}
+
+function allSensorLast(){
+  obtenerAguaLast();
+  obtenerTempLast();
+  obtenerHumLast();
+}
+
+function allSensorAll(){
+  obtenerAguaAll();
+  obtenerTempAll();
+  obtenerHumAll();
+}
+
+setInterval('allSensorLast()',30000);
