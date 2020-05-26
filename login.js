@@ -266,17 +266,17 @@ function showPrivateInfo(user) {
 
   de.style.display = "none";
   const buttonOut = document.getElementById("logOut");
-  if(user.email == "sebas_garzon@hotmail.com"){
+  if (user.email == "sebas_garzon@hotmail.com") {
     buttonOut.innerHTML = `<a href="https://io.adafruit.com/sebitil/dashboards/paw?kiosk=true" target="_blank" class="btn btn-succes btn-platzi">Adafruit IO</a>
                            <button id="btnLoad" class="btn btn-primary ml-2">Cargar datos</button>                     
                            <button id="btnLogout" class="btn btn-danger ml-2">Logout</button>`;
     const btnLoad = document.getElementById("btnLoad");
     btnLoad.addEventListener("click", allSensorAll);
-  }else{
+  } else {
     buttonOut.innerHTML = `<a href="https://io.adafruit.com/sebitil/dashboards/paw?kiosk=true" target="_blank" class="btn btn-succes btn-platzi">Adafruit IO</a>
                          <button id="btnLogout" class="btn btn-danger ml-2">Logout</button>`;
   }
-  
+
   const btnLogout = document.getElementById("btnLogout");
   btnLogout.addEventListener("click", signoutUser);
   const princi = document.getElementById("princi");
@@ -356,47 +356,47 @@ function obtenerHumAll() {
 }
 
 function postAll(data, sensor) {
-  for (var i=0; i<data.length; i++){
+  for (var i = 0; i < data.length; i++) {
     var separador = data[i].created_at.split("T");
     var hora = separador[1].slice(0, -1);
     console.log(hora);
     console.log(data[i].value);
     console.log(separador[0]);
     db.collection(sensor)
-    .doc(`${separador[0]} at ${hora}`)
-    .set({
-      fecha: `${separador[0]}`,
-      hora: `${hora}`,
-      valor: `${data[i].value}`,
-    });
+      .doc(`${separador[0]} at ${hora}`)
+      .set({
+        fecha: `${separador[0]}`,
+        hora: `${hora}`,
+        valor: `${data[i].value}`,
+      });
   }
 }
 
 function postLast(data, sensor) {
-    var separador = data[0].created_at.split("T");
-    var hora = separador[1].slice(0, -1);
-    console.log(hora);
-    console.log(data[0].value);
-    console.log(separador[0]);
-    db.collection(sensor)
+  var separador = data[0].created_at.split("T");
+  var hora = separador[1].slice(0, -1);
+  console.log(hora);
+  console.log(data[0].value);
+  console.log(separador[0]);
+  db.collection(sensor)
     .doc(`${separador[0]} at ${hora}`)
     .set({
       fecha: `${separador[0]}`,
       hora: `${hora}`,
       valor: `${data[0].value}`,
-    }); 
+    });
 }
 
-function allSensorLast(){
+function allSensorLast() {
   obtenerAguaLast();
   obtenerTempLast();
   obtenerHumLast();
 }
 
-function allSensorAll(){
+function allSensorAll() {
   obtenerAguaAll();
   obtenerTempAll();
   obtenerHumAll();
 }
 
-setInterval('allSensorLast()',30000);
+setInterval("allSensorLast()", 30000);
