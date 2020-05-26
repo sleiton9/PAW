@@ -376,7 +376,6 @@ function obtenerHumAll() {
 }
 
 function postAll(data, sensor) {
-<<<<<<< HEAD
   var conteo=0;
   var maximo=0;
   for (var i=0; i<data.length; i++){
@@ -385,9 +384,6 @@ function postAll(data, sensor) {
   }
 }
   for (var i=0; i<maximo; i++){
-=======
-  for (var i = 0; i < data.length; i++) {
->>>>>>> fa8df998230393e5f79caa2c96b34eec25bfaf98
     var separador = data[i].created_at.split("T");
     var hora = separador[1].slice(0, -1);
     console.log(hora);
